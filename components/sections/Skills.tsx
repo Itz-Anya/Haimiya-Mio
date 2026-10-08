@@ -44,7 +44,7 @@ function SkillTile({ skill }: { skill: Skill }) {
         <motion.span
           variants={{ hover: { y: -4 } }}
           transition={{ type: "spring", stiffness: 300, damping: 14 }}
-          className="relative grid size-12 place-items-center"
+          className="relative grid size-10 place-items-center min-[400px]:size-12"
         >
           <span
             aria-hidden
@@ -64,10 +64,10 @@ function SkillTile({ skill }: { skill: Skill }) {
                 },
               },
             }}
-            className="relative grid size-12 place-items-center rounded-xl bg-muted/70"
+            className="relative grid size-10 place-items-center rounded-xl bg-muted/70 min-[400px]:size-12"
           >
             <motion.span animate={controls} className="grid place-items-center">
-              <Icon aria-hidden className="size-7" style={color ? { color } : undefined} />
+              <Icon aria-hidden className="size-6 min-[400px]:size-7" style={color ? { color } : undefined} />
             </motion.span>
           </motion.span>
           {bursts.map((id) => (
@@ -112,13 +112,13 @@ export function Skills() {
           title="My Tech Stack"
           sub={`${skillCount} tools I actually use across ${skillGroups.length} areas. No fake percentages, promise.`}
         />
-        <div className="grid gap-4 md:grid-cols-6 md:gap-5">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-6 md:gap-5">
           {skillGroups.map((group, i) => (
             <Skeletonize
               key={group.id}
               shape="tiles"
               delay={(i % 2) * 0.1}
-              className={group.span}
+              className={`min-w-0 ${group.span}`}
               contentClassName="h-full"
             >
               <div className="cute-card h-full min-w-0 p-3.5 min-[400px]:p-5 md:p-6">
@@ -133,7 +133,7 @@ export function Skills() {
                 </div>
                 <motion.ul
                   {...staggerProps(0.05)}
-                  className="grid grid-cols-2 gap-2 min-[400px]:gap-2.5 sm:grid-cols-3 md:gap-3 lg:grid-cols-4"
+                  className="grid grid-cols-[repeat(2,minmax(0,1fr))] gap-2 min-[400px]:gap-2.5 sm:grid-cols-3 md:gap-3 lg:grid-cols-4"
                 >
                   {group.skills.map((skill) => (
                     <SkillTile key={skill.name} skill={skill} />
